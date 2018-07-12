@@ -1,13 +1,21 @@
 connection: "dev_emr_02_hive"
 
-# include all the views
-include: "*.view"
+include: "*.view.lkml"         # include all views in this project
+#include: "*.dashboard.lookml"  # include all dashboards in this project
 
-datagroup: demo_360_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
-
-persist_with: demo_360_default_datagroup
+# # Select the views that should be a part of this model,
+# # and define the joins that connect them together.
+#
+# explore: order_items {
+#   join: orders {
+#     relationship: many_to_one
+#     sql_on: ${orders.id} = ${order_items.order_id} ;;
+#   }
+#
+#   join: users {
+#     relationship: many_to_one
+#     sql_on: ${users.id} = ${orders.user_id} ;;
+#   }
+# }
 explore: 360_view1 {}
 explore: 360_view2 {}
